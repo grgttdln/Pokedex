@@ -14,6 +14,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const MAX_STAT = 255; // Maximum possible base stat in Pokemon
+
 export default function Home() {
   const [pokemon, setPokemon] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -21,6 +23,7 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const [nextOffset, setNextOffset] = useState(0);
   const [hasMore, setHasMore] = useState(true);
+  const [selectedPokemon, setSelectedPokemon] = useState(null);
 
   const fetchPokemon = async (offset = 0) => {
     try {
@@ -62,6 +65,10 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
+  const calculateStatPercentage = (stat) => {
+    return Math.round((stat / MAX_STAT) * 100);
+  };
+
   const filteredPokemon = pokemon.filter(
     (p) =>
       p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -97,20 +104,24 @@ export default function Home() {
         </div>
 
         <div className={styles.pokemonSection}>
+          <div className={styles.titlePokemonList}>Pokemon List</div>
           <div className={styles.searchContainer}>
             <input
               type="text"
-              placeholder="Search Pokemon"
+              placeholder="Search by name or type..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className={styles.searchInput}
             />
           </div>
-          <div className={styles.titlePokemonList}>Pokemon List</div>
 
           <div className={styles.pokemonGrid}>
             {filteredPokemon.map((p) => (
-              <div key={p.id} className={styles.pokemonCard}>
+              <div
+                key={p.id}
+                className={styles.pokemonCard}
+                onClick={() => setSelectedPokemon(p)}
+              >
                 <div className={styles.pokemonCardContent}>
                   <div className={styles.pokemonCardImage}>
                     <div className={styles.pokemonCardImageBorder}>
@@ -152,6 +163,147 @@ export default function Home() {
           )}
         </div>
       </main>
+
+      {/* Modal */}
+      {selectedPokemon && (
+        <div
+          className={styles.modalOverlay}
+          onClick={() => setSelectedPokemon(null)}
+        >
+          <div
+            className={styles.modalContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={styles.oBox1}>
+              <div className={styles.oBox2}>
+                <div className={styles.mHeaderBox}>
+                  <div className={styles.modalHeader}>
+                    <h2 className={styles.modalTitle}>
+                      {selectedPokemon.name}
+                    </h2>
+                  </div>
+                </div>
+
+                <div className={styles.mBodyBox}>
+                  <div className={styles.modalBody}>
+                    <div className={styles.modalImageContainer}>
+                      <div className={styles.modalImage}>
+                        <img
+                          src={selectedPokemon.sprite}
+                          alt={selectedPokemon.name}
+                          className={styles.modalSprite}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Stats */}
+                    <div className={styles.statsList}>
+                      <div className={styles.statItem}>
+                        <span className={styles.statLabel}>HP</span>
+                        <div className={styles.statBarContainer}>
+                          <div
+                            className={`${styles.statBar} ${styles.hp}`}
+                            style={{
+                              width: `${calculateStatPercentage(
+                                selectedPokemon.stats?.hp || 50
+                              )}%`,
+                            }}
+                          ></div>
+                        </div>
+                        <span className={styles.statValue}>
+                          {selectedPokemon.stats?.hp || 50}
+                        </span>
+                      </div>
+                      <div className={styles.statItem}>
+                        <span className={styles.statLabel}>Attack</span>
+                        <div className={styles.statBarContainer}>
+                          <div
+                            className={`${styles.statBar} ${styles.attack}`}
+                            style={{
+                              width: `${calculateStatPercentage(
+                                selectedPokemon.stats?.attack || 50
+                              )}%`,
+                            }}
+                          ></div>
+                        </div>
+                        <span className={styles.statValue}>
+                          {selectedPokemon.stats?.attack || 50}
+                        </span>
+                      </div>
+                      <div className={styles.statItem}>
+                        <span className={styles.statLabel}>Defense</span>
+                        <div className={styles.statBarContainer}>
+                          <div
+                            className={`${styles.statBar} ${styles.defense}`}
+                            style={{
+                              width: `${calculateStatPercentage(
+                                selectedPokemon.stats?.defense || 50
+                              )}%`,
+                            }}
+                          ></div>
+                        </div>
+                        <span className={styles.statValue}>
+                          {selectedPokemon.stats?.defense || 50}
+                        </span>
+                      </div>
+                      <div className={styles.statItem}>
+                        <span className={styles.statLabel}>Special Attack</span>
+                        <div className={styles.statBarContainer}>
+                          <div
+                            className={`${styles.statBar} ${styles.specialAttack}`}
+                            style={{
+                              width: `${calculateStatPercentage(
+                                selectedPokemon.stats?.specialAttack || 50
+                              )}%`,
+                            }}
+                          ></div>
+                        </div>
+                        <span className={styles.statValue}>
+                          {selectedPokemon.stats?.specialAttack || 50}
+                        </span>
+                      </div>
+                      <div className={styles.statItem}>
+                        <span className={styles.statLabel}>
+                          Special Defense
+                        </span>
+                        <div className={styles.statBarContainer}>
+                          <div
+                            className={`${styles.statBar} ${styles.specialDefense}`}
+                            style={{
+                              width: `${calculateStatPercentage(
+                                selectedPokemon.stats?.specialDefense || 50
+                              )}%`,
+                            }}
+                          ></div>
+                        </div>
+                        <span className={styles.statValue}>
+                          {selectedPokemon.stats?.specialDefense || 50}
+                        </span>
+                      </div>
+                      <div className={styles.statItem}>
+                        <span className={styles.statLabel}>Speed</span>
+                        <div className={styles.statBarContainer}>
+                          <div
+                            className={`${styles.statBar} ${styles.speed}`}
+                            style={{
+                              width: `${calculateStatPercentage(
+                                selectedPokemon.stats?.speed || 50
+                              )}%`,
+                            }}
+                          ></div>
+                        </div>
+                        <span className={styles.statValue}>
+                          {selectedPokemon.stats?.speed || 50}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

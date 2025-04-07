@@ -21,6 +21,14 @@ export default async function handler(req, res) {
             detail.sprites.other["official-artwork"].front_default ||
             detail.sprites.front_default,
           types: detail.types.map((t) => t.type.name),
+          stats: {
+            hp: detail.stats[0].base_stat,
+            attack: detail.stats[1].base_stat,
+            defense: detail.stats[2].base_stat,
+            specialAttack: detail.stats[3].base_stat,
+            specialDefense: detail.stats[4].base_stat,
+            speed: detail.stats[5].base_stat,
+          },
         };
       })
     );

@@ -355,3 +355,239 @@
     border-radius: 3px;
     overflow: hidden;
 }
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modalContent {
+    padding: 8px;
+    border-radius: 8px;
+    position: relative;
+    width: 90%;
+    max-width: 500px;
+}
+
+.modalHeader {
+    background-color: #839EFC;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.modalTitle {
+    font-family: 'Pixelify Sans', cursive;
+    font-size: 2.2rem;
+    color: #FFFFFF;
+    text-align: center;
+    text-transform: capitalize;
+    margin: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.modalBody {
+    background-color: #AFC8FF;
+    border-radius: 4px;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.modalImageContainer {
+    background-color: #FFFFFF;
+    border: 2px solid #000000;
+    border-radius: 4px;
+    padding: 2px;
+    margin-top: 5px;
+    margin-bottom: 25px;
+}
+
+.modalImage {
+    background-image: url('/images/bg-poke.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+}
+
+.modalSprite {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+}
+
+.statsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 10px;
+}
+
+.statItem {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  position: relative;
+  height: 28px;
+  border: 2px solid #000;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.statLabel {
+  font-family: 'Pixelify Sans', cursive;
+  font-size: 0.9rem;
+  color: #000000;
+  padding: 4px 8px;
+  width: 140px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+}
+
+.statBarContainer {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  background-color: #FFFFFF;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.statBar {
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+}
+
+.statValue {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  background-color: #839EFC;
+  color: #000000;
+  font-family: 'Pixelify Sans', cursive;
+  font-size: 0.9rem;
+  padding: 4px 8px;
+  width: 60px;
+  text-align: center;
+  border-left: 2px solid #000;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Update stat type colors to match the image */
+.hp { 
+  background-color: #FFB7B7;
+}
+
+.attack { 
+  background-color: #FFE4B7;
+}
+
+.defense { 
+  background-color: #B7FFE4;
+}
+
+.specialAttack { 
+  background-color: #E4B7FF;
+}
+
+.specialDefense { 
+  background-color: #B7FFE4;
+}
+
+.speed { 
+  background-color: #B7E4FF;
+}
+
+.closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: 'Pixelify Sans', cursive;
+}
+
+.oBox1 {
+  background-color: #f5f5f5;
+  border: 1px solid #000000;
+  border-radius: 3px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: 2px solid #000000;
+  width: 100%;
+  height: 100%;
+}
+
+.oBox2 {
+  background-color: #f5f5f5;
+  border: 1px solid #000000;
+  border-radius: 3px;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  border: 2px solid #000000;
+  width: 104%;
+  height: 100%;
+  margin-left: -2%;
+  margin-right: -2%;
+}
+
+
+.mHeaderBox {
+  background-color: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 3px 0 0 0;
+  padding: 2px;
+  position: relative;
+  z-index: 2;
+  width: 80%;
+  margin: -80px auto 14px;
+}
+
+
+.mBodyBox {
+  background-color: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 3px;
+  padding: 2px;
+  position: relative;
+  z-index: 1;
+  margin-top: -15px;
+}
